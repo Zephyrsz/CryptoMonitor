@@ -5,61 +5,32 @@
 # https://api.coinmarketcap.com/data-api/v3/cryptocurrency/historical?id={id}&convertId=2781&timeStart={starttime}&timeEnd={endtime}
 # 4)  dataparlser
 
-from datetime import datetime,timedelta
+from datetime import datetime,timedelta,date
 
-import requests
-from bs4 import BeautifulSoup
+def init():
+    today = datetime.now()
+    return get_start_timestap(today.year,today.month,today.day)
 
-from cryptomon.html_extractor import HtmlExtractor
+def get_start_timestap(year,month,day):
+    dt = datetime(year, month, day, 8, 0, 0)
+    return dt
+
+def get_deltaday(startday,dayCap):
+    next_dt = (startday - timedelta(days=dayCap))
+    return next_dt
 
 
-def get_timestap():
-    dt = datetime(2022, 2, 19, 8, 0, 0).timestamp()
-    print(int(dt))
+init_start_day = init()
+gap = 60
+remain_day = 1000
+iter_count = 1000//gap
+inter = 0
 
-def get_deltaday(dayCap = 60):
-    next_dt = (datetime(2022, 2, 19, 8, 0, 0)+ timedelta(days=dayCap)).timestamp()
-    print(int(next_dt))
-
-def get_data(self, symbol):
-        """
-        Get data from the symbol and parse it.
-        :param symbol: Symbol
-        :returns Array of market volume
-        """
-        ret = []
-        response = requests.get(HtmlExtractor.URL % symbol)
-        if response.status_code == 200:
-            # Successful
-            soup = BeautifulSoup(response.text, 'html.parser')
-            tables = soup.find_all('table')
-            market_table = None
-            for table in tables:
-                if table.has_attr('id'):
-                    market_table = table
-            assert market_table is not None, "Cannot find table markets-table"
-            table_body = market_table.find_all('tbody')
-            assert len(table_body) == 1, \
-                "Number of table body (%d) should be equal to 1." % len(table_body)
-            records = table_body[0].find_all('tr')
-
-            # Parse each record
-            for record in records:
-                entries = record.find_all('td')
-                exchange = entries[HtmlExtractor.EXCHANGE_INDEX].text
-                pair = entries[HtmlExtractor.PAIR_INDEX].text
-                price = re.search("(\d+\.*\d*)",
-                                  entries[HtmlExtractor.PRICE_INDEX].text).group(0)
-                price = float(price)
-                market_share = re.search("(\d+\.*\d*)",
-                                         entries[HtmlExtractor.MARKET_SHARE_INDEX].text).group(0)
-                market_share = float(market_share)
-                update = entries[HtmlExtractor.LATEST_UPDATE_INDEX].text
-                if update == "Recently":
-                    ret.append(CurrencyPair(exchange, pair, price, market_share))
-        else:
-            # Failed
-            raise requests.exceptions.HTTPError("Http request error: %d" % response.status_code)
-
-        return ret
+for i in range(1,iter_count):
+    startday = get_deltaday(init_start_day,inter)
+    endday = get_deltaday(startday,gap)
+    inter = inter + gap + 1
+    print(inter)
+    # print("###############")
+    print("start_day is %s, end_day is %s" % (int(startday.timestamp()),int(endday.timestamp())))
 

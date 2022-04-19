@@ -70,9 +70,22 @@ class HtmlExtractor(object):
         if response.status_code == 200:
             return response
 
-    def history_parser(response):
+    def history_parser(self,response):
         data = json.loads(response.text)
+        dataIner= data['data']
+        id = dataIner['id']
+        name = dataIner['name']
+        quotes = dataIner['quotes']
+        for quote in data:
+            quote_data=quote['quote']
 
+    def timeStamp_generator(self, date_start, day_gap =60):
+        pass
+
+
+
+###grace print json data
+import pprint
         
 if __name__ == '__main__':
     extractor = HtmlExtractor()
@@ -80,5 +93,10 @@ if __name__ == '__main__':
     start = 1645228800
     end = 1650326400
     response = extractor.get_data(id,start,end)
-    print(response.text)
+    data = extractor.history_parser(response)
+    # print(type(data))
+    for quote in data:
+        quote_data=quote['quote']
+        print(quote_data)
+    # pprint.pprint(data)
 
