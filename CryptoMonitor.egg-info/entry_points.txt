@@ -1,0 +1,3 @@
+[console_scripts]
+cryptomon = cryptomon.cryptomonitor:main
+

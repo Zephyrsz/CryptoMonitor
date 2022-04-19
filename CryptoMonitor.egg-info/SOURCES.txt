@@ -1,0 +1,15 @@
+LICENSE.txt
+README.md
+setup.py
+CryptoMonitor.egg-info/PKG-INFO
+CryptoMonitor.egg-info/SOURCES.txt
+CryptoMonitor.egg-info/dependency_links.txt
+CryptoMonitor.egg-info/entry_points.txt
+CryptoMonitor.egg-info/requires.txt
+CryptoMonitor.egg-info/top_level.txt
+cryptomon/__init__.py
+cryptomon/arbitrage_monitor.py
+cryptomon/cryptomonitor.py
+cryptomon/graceful_killer.py
+cryptomon/html_extractor.py
+cryptomon/stack_api_client.py
