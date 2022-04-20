@@ -14,6 +14,7 @@ PEOPLE = [
 #     os.remove("people.db")
 
 # Create the database
+db.drop_all()
 db.create_all()
 
 # iterate over the PEOPLE structure and populate the database
