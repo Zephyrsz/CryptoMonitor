@@ -27,7 +27,7 @@ columns2 = ['price','percent_change_24h','volume_24h','volume_change_24h','perce
 from sqlalchemy import create_engine
 
 def write2mysql(df):
-  engine = create_engine("mysql+pymysql://{user}:{pw}@localhost:{port}/{db}"
+  engine = create_engine("mysql+pymysql://{user}:{pw}@127.0.0.1:{port}/{db}"
                          .format(user="root",
                                  pw="rootpwd123",
                                  port="4306",
