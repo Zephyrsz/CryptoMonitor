@@ -47,8 +47,8 @@ try:
     for c in clist:
         randdate = c.get("lastUpdated")[0:10]
         rkdt = datetime.fromisoformat(randdate)
-        crank = CMCRank(id=c.get("id"),rank = c.get("cmcRank"),symbol = c.get("symbol"), rank_date = rkdt )
-        if db.session.query(CMCRank).filter_by(id=crank.id).filter_by(rank_date=crank.rank_date ).first() is None:
+        crank = CMCRank(cmcid=c.get("id"),cmcrank=c.get("cmcRank"),symbol = c.get("symbol"), rank_date = rkdt )
+        if db.session.query(CMCRank).filter_by(cmcid=crank.cmcid).filter_by(rank_date=crank.rank_date ).first() is None:
             db.session.add(crank)
     db.session.commit()
 except Exception as e:

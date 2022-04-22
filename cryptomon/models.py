@@ -19,8 +19,8 @@ class CMCCrypotMetaSchema(ma.SQLAlchemyAutoSchema):
 class CMCRank(db.Model):
     __tablename__ = "CMCRank"
     tid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    id = db.Column(db.Integer)
-    rank = db.Column(db.Integer)
+    cmcid = db.Column(db.Integer)
+    cmcrank = db.Column(db.Integer)
     symbol = db.Column(db.String(50))
     rank_date = db.Column(db.DateTime)
 
