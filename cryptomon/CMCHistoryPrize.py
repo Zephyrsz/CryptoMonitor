@@ -4,6 +4,13 @@ from config import db
 from models import CMCRank
 from datetime import datetime
 
+####columns [cid, date, open,close,]
+####url https://api.coinmarketcap.com/data-api/v3/cryptocurrency/historical?id=1027&convertId=2781&timeStart=1643068800&timeEnd=1645660800
+####
+
+
+
+
 class HistoryPrizeExtractor(object):
     """
     Extract the cryptocurrency price information from the website coinmarketcap.
@@ -35,7 +42,6 @@ class HistoryPrizeExtractor(object):
         return crypoList
 
     # columns id ,rank ,symbol,rank_date
-
 
 import pprint
 
