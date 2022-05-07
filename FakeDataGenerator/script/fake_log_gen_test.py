@@ -9,7 +9,7 @@ import datetime
 import time
 import json
 import random
-from src.fake_log_gen import fake_log_gen
+from fake_log_gen import fake_log_gen
 
 class access_test(fake_log_gen.fake_access_gen):
 
@@ -107,7 +107,6 @@ class error_test(fake_log_gen.fake_error_gen):
 # Testing Class
 
 class Test_Log_Gen:
-
 	def test_error_log(self):
 		f = os.environ['VISORHOME']+"/tests/tmp/"+"error_logs_test.txt"
 		with open(f, "w+") as error_file:

@@ -1,4 +1,4 @@
-from src.fake_log_gen import fake_log_gen
+from fake_log_gen import fake_log_gen
 import kafka
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
@@ -13,13 +13,13 @@ import datetime
 import time
 from asyncio import coroutine
 import numpy
-
+import fake_log_gen
 # Used to generate Apache Access Logs
 # And send to Kafka
+# class fake_access_producer(fake_log_gen.fake_access_gen):
 class fake_access_producer(fake_log_gen.fake_access_gen):
-
 	def run(self):
-		self.producer = KafkaProducer(bootstrap_servers='localhost:9092')
+		self.producer = KafkaProducer(bootstrap_servers='localhost:9192')
 		super(fake_access_producer, self).run()
 
 	@coroutine
@@ -58,7 +58,7 @@ class fake_access_producer(fake_log_gen.fake_access_gen):
 class fake_error_producer(fake_log_gen.fake_error_gen):
 
 	def run(self):
-		self.producer = KafkaProducer(bootstrap_servers='localhost:9092')
+		self.producer = KafkaProducer(bootstrap_servers='localhost:9192')
 		super(fake_error_producer, self).run()
     
 	@coroutine
